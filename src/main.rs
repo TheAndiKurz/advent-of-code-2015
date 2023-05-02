@@ -1,4 +1,5 @@
 mod day1;
+mod day2;
 
 fn main() {
     println!("Hello, world!");
@@ -10,4 +11,8 @@ fn main() {
     println!("\n\n");
 
     println!("day2:");
+    day2::first_part();
+    day2::second_part();
+
+    println!("\n\n");
 }
