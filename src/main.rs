@@ -1,3 +1,5 @@
+use std::io::{self, Write};
+
 mod day1;
 mod day2;
 mod day3;
@@ -5,29 +7,31 @@ mod day4;
 mod utils;
 
 fn main() {
-    println!("Hello, world!");
+    // read line from console which day you want to execute
+    let mut input = String::new();
+    print!("Enter day: ");
+    io::stdout().flush().unwrap();
 
-    println!("day1:");
-    day1::first_part();
-    day1::second_part();
+    std::io::stdin().read_line(&mut input).unwrap();
+    let day = input.trim().parse::<i8>().unwrap();
 
-    println!("\n\n");
-
-    println!("day2:");
-    day2::first_part();
-    day2::second_part();
-
-    println!("\n\n");
-
-    println!("day3:");
-    day3::first_part();
-    day3::second_part();
-
-    println!("\n\n");
-
-    println!("day4:");
-    day4::first_part();
-    day4::second_part();
-
-    println!("\n\n");
+    match day {
+        1 => {
+            day1::first_part();
+            day1::second_part();
+        }
+        2 => {
+            day2::first_part();
+            day2::second_part();
+        }
+        3 => {
+            day3::first_part();
+            day3::second_part();
+        }
+        4 => {
+            day4::first_part();
+            day4::second_part();
+        }
+        _ => println!("Day not implemented yet!"),
+    }
 }
