@@ -1,38 +1,15 @@
+use crate::utils::get_data;
 use std::cmp::min;
-use std::fs::File;
-use std::io::Read;
-use std::path::Path;
-
-fn get_data() -> String {
-    // create a path to the file
-    let path = Path::new("./data/day2");
-    let display = path.display();
-
-    // open the path in read-only mode
-    let mut file = match File::open(&path) {
-        Err(why) => panic!("couldn't open {}: {}", display, why),
-        Ok(file) => file,
-    };
-
-    let mut data = String::new();
-
-    match file.read_to_string(&mut data) {
-        Err(why) => panic!("couldn't read {}: {}", display, why),
-        Ok(_) => {}
-    }
-
-    return data;
-}
 
 pub fn first_part() {
-    let data = get_data();
+    let data = get_data("./data/day2");
 
-    let lines = data.split("\n");
+    let lines = data.split('\n');
 
     let mut total_sq: i64 = 0;
 
     for line in lines {
-        let dims = line.split("x").collect::<Vec<&str>>();
+        let dims = line.split('x').collect::<Vec<&str>>();
 
         if dims.len() != 3 {
             continue;
@@ -58,14 +35,14 @@ pub fn first_part() {
 }
 
 pub fn second_part() {
-    let data = get_data();
+    let data = get_data("./data/day2");
 
-    let lines = data.split("\n");
+    let lines = data.split('\n');
 
     let mut total_ribbon: i64 = 0;
 
     for line in lines {
-        let dims = line.split("x").collect::<Vec<&str>>();
+        let dims = line.split('x').collect::<Vec<&str>>();
 
         if dims.len() != 3 {
             continue;

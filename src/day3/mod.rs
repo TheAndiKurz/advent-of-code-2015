@@ -1,28 +1,5 @@
+use crate::utils::get_data;
 use std::collections::HashSet;
-use std::fs::File;
-use std::io::Read;
-use std::path::Path;
-
-fn get_data() -> String {
-    // create a path to the file
-    let path = Path::new("./data/day3");
-    let display = path.display();
-
-    // open the path in read-only mode
-    let mut file = match File::open(&path) {
-        Err(why) => panic!("couldn't open {}: {}", display, why),
-        Ok(file) => file,
-    };
-
-    let mut data = String::new();
-
-    match file.read_to_string(&mut data) {
-        Err(why) => panic!("couldn't read {}: {}", display, why),
-        Ok(_) => {}
-    }
-
-    return data;
-}
 
 fn move_santa(c: char, location: &mut (i32, i32)) -> Result<(), &'static str> {
     match c {
@@ -37,7 +14,7 @@ fn move_santa(c: char, location: &mut (i32, i32)) -> Result<(), &'static str> {
 }
 
 pub fn first_part() {
-    let data = get_data();
+    let data = get_data("./data/day3");
 
     let mut location = (0, 0);
 
@@ -46,14 +23,14 @@ pub fn first_part() {
     for c in data.chars() {
         move_santa(c, &mut location).unwrap();
 
-        houses.insert(location.clone());
+        houses.insert(location);
     }
 
     println!("Houses visited: {}", houses.len());
 }
 
 pub fn second_part() {
-    let data = get_data();
+    let data = get_data("./data/day3");
 
     let mut location = (0, 0);
     let mut robo_location = (0, 0);
@@ -63,12 +40,12 @@ pub fn second_part() {
     for (i, c) in data.chars().enumerate() {
         if i % 2 == 0 {
             move_santa(c, &mut location).unwrap();
-            houses.insert(location.clone());
+            houses.insert(location);
             continue;
         }
 
         move_santa(c, &mut robo_location).unwrap();
-        houses.insert(robo_location.clone());
+        houses.insert(robo_location);
     }
 
     println!("Houses visited: {}", houses.len());

@@ -1,30 +1,7 @@
-use std::fs::File;
-use std::io::Read;
-use std::path::Path;
-
-fn get_data() -> String {
-    // create a path to the file
-    let path = Path::new("./data/day1");
-    let display = path.display();
-
-    // open the path in read-only mode
-    let mut file = match File::open(&path) {
-        Err(why) => panic!("couldn't open {}: {}", display, why),
-        Ok(file) => file,
-    };
-
-    let mut data = String::new();
-
-    match file.read_to_string(&mut data) {
-        Err(why) => panic!("couldn't read {}: {}", display, why),
-        Ok(_) => {}
-    }
-
-    return data;
-}
+use crate::utils::get_data;
 
 pub fn first_part() {
-    let data = get_data();
+    let data = get_data("./data/day1");
 
     let mut floor: i64 = 0;
 
@@ -45,7 +22,7 @@ pub fn first_part() {
 }
 
 pub fn second_part() {
-    let data = get_data();
+    let data = get_data("./data/day1");
 
     let mut floor: i64 = 0;
 
