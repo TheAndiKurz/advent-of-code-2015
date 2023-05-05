@@ -4,6 +4,7 @@ mod day1;
 mod day2;
 mod day3;
 mod day4;
+mod day5;
 mod utils;
 
 fn main() {
@@ -31,6 +32,10 @@ fn main() {
         4 => {
             day4::first_part();
             day4::second_part();
+        }
+        5 => {
+            day5::first_part();
+            day5::second_part();
         }
         _ => println!("Day not implemented yet!"),
     }
