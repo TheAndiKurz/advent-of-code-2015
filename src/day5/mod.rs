@@ -73,26 +73,24 @@ pub fn first_part() {
 fn check_line_is_nice_2(line: &str) -> bool {
     let mut pairs = HashMap::new();
 
-    let line_bytes = line.as_bytes();
+    let line_vec = line.as_bytes().to_vec();
 
-    let collection = line_bytes.iter().collect::<Vec<&u8>>();
-
-    let triplet = collection.windows(3).any(|window| window[0] == window[2]);
+    let triplet = line_vec.windows(3).any(|window| window[0] == window[2]);
 
     if !triplet {
         return false;
     }
 
-    let double_pair = collection.windows(2).enumerate().any(|(i, window)| {
-        if pairs.contains_key(&(*window[0], *window[1])) {
-            if i - pairs[&(*window[0], *window[1])] > 1 {
+    let double_pair = line_vec.windows(2).enumerate().any(|(i, window)| {
+        if pairs.contains_key(&(window[0], window[1])) {
+            if i - pairs[&(window[0], window[1])] > 1 {
                 return true;
             }
 
             return false;
         }
 
-        pairs.insert((*window[0], *window[1]), i);
+        pairs.insert((window[0], window[1]), i);
 
         false
     });
